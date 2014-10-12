@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="commentmapper">
+ <insert id="create" parameterType="comment" useGeneratedKeys="true" keyProperty="id">
+   insert into comment (blogId,userId,content,createTime,isReply) values (#{blogId},#{userId},#{content},#{createTime},#{isReply})
+ </insert>
+ 
+ <select id="selectComment" parameterType="long" resultType="blogComment">
+ 	select c.blogId as blogId,c.userId as userId,c.content as content,c.createTime as createTime,c.isReply as Reply,u.name as name 
+ 	from comment c, user u where c.blogId = #{blogId} and u.id = c.userId
+ </select>
+ <delete id="deleteComment" parameterType="long">
+ 	delete from comment where id = #{id}
+ </delete>
+</mapper>

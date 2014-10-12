@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+ 	<context:annotation-config />  
+ 	 <mvc:annotation-driven/>
+ 	 <mvc:resources location="/js/" mapping="/js/**"/>
+ 	 <mvc:resources location="/style/" mapping="/style/**"/>
+ 	 <mvc:resources location="/images/" mapping="/images/**"/>
+ 	 
+ 	 <!-- 拦截器bean -->
+ 	 <mvc:interceptors>
+ 	 	<!-- 配置未登陆操作的请求 -->
+ 	 	<mvc:interceptor>
+ 	 		<mvc:mapping path="/*/**"/>
+ 	 		<bean class="com.gametech.interceptor.SessionInterceptor">
+ 	 		<!-- 配置未登陆不能操作的请求 -->
+ 	 		<property name="urlCheckList">
+ 	 			<list>
+ 	 				<value>toWrite</value>
+ 	 				<value>updateBlog</value>
+ 	 				<value>usercenter</value>
+ 	 			</list>
+ 	 		</property>
+ 	 		</bean>
+ 	 	</mvc:interceptor>
+ 	 </mvc:interceptors>
+ 	<context:component-scan base-package="com.gametech.controller" />
+    <!-- annotation的方法映射适配器 -->
+    <bean id="handlerAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    	<property name="messageConverters">   
+         <list>   
+             <bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+                <property name = "supportedMediaTypes"> 
+                      <list> 
+                          <value>text/html;charset=UTF-8</value>   
+                     </list>   
+                </property>   
+             </bean>   
+         </list>   
+   </property>  
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >  
+    <property name="order" value="0" />  
+    </bean>
+    
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="viewClass"
+	          value="org.springframework.web.servlet.view.JstlView"/><!--
+	  		   如果这里的Value = "",刚从controller中跳转回来的jsp 文件默认是在WEB-INF下面
+	    --><property name="prefix" value="/WEB-INF/" />
+	    <property name="suffix" value=".jsp" />
+	</bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="answermapper">
+<select id="getAnswerByQuestionId" parameterType="long" resultType="answer">
+ select a.id,a.userid,a.questionid,a.content,a.isRecieve,a.createTime,u.name as name from answer a,user u where questionid = #{id} and a.userid = u.id order by a.createTime
+</select>
+<insert id="insertAnswer" parameterType="answer" useGeneratedKeys="true" keyProperty="id">
+ insert into answer (userid,questionid,content,createTime,isRecieve) values(#{userid},#{questionid},#{content},#{createTime},#{isRecieve})
+</insert>
+<update id="updateAnswer" parameterType="answer">
+	update answer set content = #{content},createTime=#{createTime},isRecieve = #{isRecieve} where id=#{id} and userid=#{userid}
+</update>
+<delete id="deleteAnswerById" parameterType="long">
+	delete from answer where id = #{id}
+</delete>
+<update id="updateReceive" parameterType="long">
+	update answer set isRecieve = 1 where id = #{answerid}
+</update>
+<select id="getAnswerById" parameterType="long" resultType="answer">
+select * from answer where id = #{answerId}
+</select>
+</mapper>

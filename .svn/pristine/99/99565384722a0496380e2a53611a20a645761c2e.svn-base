@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="questionmapper">
+	<select id="selectQuestionById" parameterType="long" resultType="question">
+		select *,u.name as name from question q,user u where q.id = #{questionid} and u.id = q.userid
+	</select>
+	<insert id="insertQuestion" parameterType="question" useGeneratedKeys="true" keyProperty="id">
+		insert into question (userid,content,shortTitle,createTime,sortId,answers,isOk,xuanshang) values(#{userid},#{content},#{shortTitle},#{createTime},#{sortId},#{answers},#{isOk},#{xuanshang})
+	</insert>
+	<select id="getQuestion" parameterType="question_param" resultType="question">
+		select * from question where id > 0 <if test="userid != 0"> and userid = #{userid}</if> <if test="sortId != 0">  and sortId = #{sortId}</if> <if test="status != 2"> and isOk = #{status}</if> order by createTime desc limit #{start},#{size} 
+	</select>
+	<select id="getAnswers" parameterType="long" resultType="int">
+		select answers from question where id = #{questionid}
+	</select>
+	<update id="updateQuestion" parameterType="question">
+		update question set content = #{content},answers = #{answers},createTime = #{createTime},sortId=#{sortId} where id = #{id}
+	</update>
+	<update id = "updateAnswers" parameterType="question">
+		update question set answers = #{answers} where id = #{id}
+	</update>
+	<select id="getTotalNumber" parameterType="paramPages" resultType="int">
+		select count(*) from question where id > 0 <if test="userid != 0">and userid = #{userid}</if> <if test="type != 0">and isOk = #{type}</if>
+		<if test="someId != 0"> and sortId = #{someId}</if>
+	</select>
+	<update id="updateQuestionToSolve" parameterType="long">
+		update question set isOk = 1 where id = #{questionid}
+	</update>
+	<delete id="deleteOneQuestion" parameterType="long">
+		delete from question where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="userInfomapper">
+<select id="getUserInfoById" parameterType="long" resultType="userinfo">
+	select * from user_info where userid = #{userid}
+</select>
+
+<insert id="insertUserInfo" parameterType="userinfo" useGeneratedKeys="true" keyProperty="id">
+	insert into user_info(userid,jifen,account) values(#{userid},#{jifen},#{account})
+</insert>
+<update id="updateUserInfo" parameterType="userinfo">
+	update user_info set jifen = #{jifen},account = #{account} where userid = #{userid}
+</update>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="sortmapper">
+<select id="getAllSort" resultType="sort" parameterType="long">
+select * from sort where userid = #{userid} order by Id desc;
+</select>
+
+<delete id="deleteSort" parameterType="long">
+delete from sort where Id = #{id}
+</delete>
+<delete id="deleteUserSort" parameterType="sort">
+	delete from sort where Id = #{id} and userid = #{userid}
+</delete>
+<update id="updateSort" parameterType="sort">
+update sort set name = #{name},blogs = #{blogs} where Id = #{id} and userid = #{userid}
+</update>
+<insert id="insertSort" useGeneratedKeys="true" keyProperty="id">
+insert into sort (userid,name,blogs) values(#{userid},#{name},#{blogs})
+</insert>
+<select id="getSortById" parameterType="long" resultType="sort">
+select * from sort where Id =#{id}
+</select>
+<select id="getSortByName" resultType="sort" parameterType="sort">
+ select * from sort where name = #{name} and userid = #{userid}
+</select>
+</mapper>

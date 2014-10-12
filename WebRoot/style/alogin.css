@@ -1,0 +1,60 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #214D90 url(../images/bg.gif) repeat-x;
+	color: #999999;
+	font-family: Tahoma, Verdana;
+}
+
+.Main {
+	width: 960px;
+	margin: 150px auto 0 auto;
+}
+
+/*cloud*/
+#mainBody {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1;
+}
+
+.cloud {
+	position: absolute;
+	top: 20px;
+	left: 50px;
+	width: 100%;
+	height: 100%;
+	background: url(../images/cloud.png) no-repeat;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+#cloud2 {
+	z-index: 2;
+}
+
+.login_input {
+	width: 940px;
+	height: 420px;
+	background: url(../images/login.png) no-repeat;
+	margin-top: 20px;
+}
+.t_input{
+	width: 180px;
+	height: 30px;
+	
+}
+.t_captcha{
+	width: 90px;
+	height: 30px;
+}
+.input_login {
+	position: absolute;
+	margin-left: 470px;
+	margin-top: 70px;
+	width: 330px;
+}
+.submit {
+	cursor: pointer;
+}

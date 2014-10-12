@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="usermapper">
+    <select id="countAll" resultType="int">
+        select count(*) c from user_info;
+    </select>
+    <insert id="saveUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+     insert into user(password,mail,name,registtime,ip) values (#{password},#{mail},#{name},#{registtime},#{ip})
+    </insert>
+    <select id="selectUser" resultType="user" parameterType="String">
+     select * from user where mail = #{mail}
+    </select>
+    <select id="selectUserByName" resultType="user" parameterType="String">
+    select * from user where name = #{name}
+    </select>
+</mapper>

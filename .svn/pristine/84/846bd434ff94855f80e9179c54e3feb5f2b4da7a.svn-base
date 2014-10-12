@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="paycachemapper">
+
+<insert id="insertPayCache" parameterType="payCache" useGeneratedKeys="true" keyProperty="id">
+	insert into paycache (userid,event_id,price,createTime,status,type,remarks) values (#{userid},#{event_id},#{price},#{createTime},#{status},#{type},#{remarks})
+</insert>
+<select id="getLockPay" parameterType="payCache" resultType="int">
+	select sum(price) from paycache where event_id = #{event_id} and userid = #{userid} and type = #{type}
+</select>
+<update id="updateStatus" parameterType="payCache">
+	update paycache set status = #{status} where event_id = #{event_id} and userid = #{userid} and type = #{type}
+</update>
+<select id="getPrice" parameterType="payCache" resultType="int">
+	select price from paycache where event_id = #{event_id} and userid = #{userid} and type = #{type}
+</select>
+</mapper>

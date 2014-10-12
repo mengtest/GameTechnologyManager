@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!--由Sprng载入的Log4j配置文件位置-->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>
+   <!-- 加入log4j的配置文件-->
+			classpath:log4j.properties
+		</param-value>
+	</context-param>
+
+	<!-- spring配置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+   <!--加入Spring配置文件-->
+			classpath:com/gametech/config/spring/applicationContext-*.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<!-- 配置Spring框架自身的拦截器 解决乱码问题(spring.jar)  -->
+	<filter>
+		<filter-name>SpringEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>  
+     <filter-name>SpringEncoding</filter-name>  
+     <url-pattern>/*</url-pattern>
+     </filter-mapping>
+	<servlet>
+		<!-- 配置请求的跳转 -->
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- 如果是在tomcat上面，可能需要加入下面的配置 -->
+	<!--
+		<servlet-mapping> <servlet-name>default</servlet-name>
+		<url-pattern>/js/*</url-pattern> </servlet-mapping> <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/images/*</url-pattern> </servlet-mapping>
+	-->
+</web-app>
