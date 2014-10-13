@@ -19,4 +19,7 @@
 	 <bean id="MemberDao" class="com.gametech.dao.MemberDao">
 	 	<property name="sqlSessionTemplate" ref="sqlSession"/>
 	 </bean>
+	  <bean id="blogDao" class="com.gametech.dao.BlogDao">
+	 	<property name="sqlSessionTemplate" ref="sqlSession"/>
+	 </bean>
     </beans>

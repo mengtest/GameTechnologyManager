@@ -18,7 +18,7 @@
     	var code = $("#checkCode").val();
     	var flag = false;
     	if(code == ""){
-    		alert("请输入验证码！");
+    		$("#msg").html("请输入验证码");
     	} else {
     		$.ajax({
     			 url:'checkCode/' + code,
@@ -31,7 +31,7 @@
     					if(data.ok == 1){
     						flag =  true;
     					} else {
-    						alert("验证码错误");
+    						$("#msg").html("验证码错误！");
     					}
     				}	
     		 });	
@@ -45,14 +45,75 @@
     		var name = $("#name").val();
     		var password = $("#password").val();
     		$.ajax({
+    			type:'post',
     			url:'member/checkMember',
-    			data:''
+    			dataType:"json",
+    		    contentType:'application/json;charset=UTF-8',
+    			data:JSON.stringify({name:name,password:password,code:code}),
+    			
+    			error:function(data) {alert("网络错误，请稍后再试.....");},
+    			success:function(data){
+    				if(data == 1){
+    					$("#msg").html("用户不存在");
+    				} else if(data == 2){
+    					$("#msg").html("用户或密码错误");
+    				} else if(data == 3){
+    					$("#msg").html("验证码错误");
+    				} else {
+    					$("#msg").html("");
+    					$("#loginForm").submit();
+    				}
+    			}
     		});
     	}
     }
-    
+    //jquery-ui中，用于格式化date日期
+    function formatDate(val, row) {
+		var datetime = new Date();
+		datetime.setTime(val);
+		var year = datetime.getFullYear();
+		var month = datetime.getMonth() + 1 < 10 ? "0"
+				+ (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+		var date = datetime.getDate() < 10 ? "0" + datetime.getDate()
+				: datetime.getDate();
+		var hour = datetime.getHours() < 10 ? "0" + datetime.getHours()
+				: datetime.getHours();
+		var minute = datetime.getMinutes() < 10 ? "0"
+				+ datetime.getMinutes() : datetime.getMinutes();
+		var second = datetime.getSeconds() < 10 ? "0"
+				+ datetime.getSeconds() : datetime.getSeconds();
+		return year + "-" + month + "-" + date + " " + hour + ":" + minute
+				+ ":" + second;
+	}
     $(document).ready(function(){
     	$("#checkCode").blur(function(){
     		checkCode();
+    	});
+    	//提交文章
+    	$("#publish").click(function(){
+    		var ue = UE.getEditor("container");
+    		var content = ue.getContentTxt();
+    		var title = $("#title").val();
+    		
+    		var articalTag = $("#tag").val();
+    		var sortNames = $("#sortId").val();
+    		var classify = $("#classifyId").val();
+    		if(title == ""){
+    			alert("请填写标题!");
+    			return ;
+    		}
+    		if(content == ""){
+    			alert("文章内容不能为空");
+    			return;
+    		}
+    		if(articalTag == ""){
+    		    alert("请填写标签");
+    		    return ;
+    		}
+    		if(classify == -1){
+    			alert("请选择文章分类");
+    			return;
+    		}
+    		document.submitForm.submit();
     	});
     });

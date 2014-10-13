@@ -44,4 +44,20 @@ public class IndexController {
 		}
 		return map;
 	}
+	@RequestMapping("/main")
+	public String toMain(){
+		return "/jsp/main";
+	}
+	@RequestMapping("/menu")
+	public String menu(){
+		return "/jsp/menu";
+	}
+	@RequestMapping("/content")
+	public String content(){
+		return "/jsp/content";
+	}
+	@RequestMapping("/top")
+	public String top(){
+		return "jsp/top";
+	}
 }

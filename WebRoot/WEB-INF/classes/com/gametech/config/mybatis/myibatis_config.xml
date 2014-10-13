@@ -13,13 +13,8 @@
 <typeAlias type="com.gametech.entity.Comment" alias="comment"/>
 <typeAlias type="com.gametech.entity.BlogComment" alias="blogComment"/>
 <typeAlias type="com.gametech.entity.BlogTitle" alias="blogTitle"/>
-<typeAlias type="com.gametech.entity.ParamPages" alias="paramPages"/>
 <typeAlias type="com.gametech.entity.PayCache" alias="payCache"/>
 <typeAlias type="com.gametech.entity.Member" alias="member"/>
-
-<!-- 数据库查询参数别名 -->
-<typeAlias type="com.gametech.config.mybatis.param.QuestionParam" alias="question_param"/>
-<typeAlias type="com.gametech.config.mybatis.param.BlogParam" alias="blogParam"/>
 </typeAliases>
     <mappers>
         <mapper resource="com/gametech/config/mybatis/user.xml"/>

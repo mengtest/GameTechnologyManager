@@ -1,5 +1,6 @@
 package com.gametech.interceptor;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,43 +13,54 @@ import com.gametech.utils.HttpUtils;
 
 /**
  * 
- *@Title:国安足球经理（移动）
- *@author guangshuai.wang
- * <p>Description:对session的拦截检测 </p>
+ * @Title:国安足球经理（移动）
+ * @author guangshuai.wang
+ *         <p>
+ *         Description:对session的拦截检测
+ *         </p>
  */
-public class SessionInterceptor implements HandlerInterceptor{
+public class SessionInterceptor implements HandlerInterceptor {
 
-	//需要拦截的没有登陆不能操作的请求，在dispatcher-servlet.xml中配置
+	// 需要拦截的没有登陆不能操作的请求，在dispatcher-servlet.xml中配置
 	private List<String> urlCheckList = null;
+
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
 			Object arg2, ModelAndView arg3) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object arg2) throws Exception {
 		String contextPath = request.getContextPath();
 		String request_uri = request.getRequestURI();
-		//检查是否登陆
-		if(urlCheckList != null){
-			for(String checkUrl : urlCheckList){
-				if(checkUrl == null){
+		// 检查是否登陆
+		if (urlCheckList != null) {
+			for (String checkUrl : urlCheckList) {
+				if (checkUrl == null) {
 					continue;
 				}
-				if(request_uri.contains(checkUrl)){
-					//未登陆，不能操作，跳转到登陆页面
-					if(HttpUtils.getUser(request) == null){
-						//跳转到登陆页面
-						response.sendRedirect(contextPath);
-						
+				if (request_uri.contains(checkUrl)) {
+					// 未登陆，不能操作，跳转到登陆页面
+					if (HttpUtils.getUser(request) == null) {
+						// 跳转到登陆页面
+						// response.sendRedirect(contextPath);
+						String CONTENT_TYPE = "text/html; charset=utf-8";
+					    response.setContentType(CONTENT_TYPE);
+						PrintWriter out = response.getWriter();
+						out.println("<html>");
+						out.println("<script>");
+						out.println("alert('您未登陆或登陆已过期，请登陆！！');");
+						out.println("window.open ("+ contextPath+"/,'_top')");
+						out.println("</script>");
+						out.println("</html>");
 						return false;
 					}
 				}
@@ -64,5 +76,5 @@ public class SessionInterceptor implements HandlerInterceptor{
 	public void setUrlCheckList(List<String> urlCheckList) {
 		this.urlCheckList = urlCheckList;
 	}
-	
+
 }

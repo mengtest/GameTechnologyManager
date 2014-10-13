@@ -20,7 +20,7 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link href="<%=basePath%>style/alogin.css" rel="stylesheet"
+<link href="<%=basePath%>css/alogin.css" rel="stylesheet"
 	type="text/css" />
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/common.js"></script>
@@ -36,8 +36,13 @@
 	<div class="Main">
 		<div class="login_input">
 			<div class="input_login">
-				<form action="member/login" method="post">
+				<form action="member/login" method="post" id="loginForm">
 				  <table width="300">
+				    <tr height="20">
+				     <td colspan="2" align="center">
+				     	<span id="msg" style="color: red;font-size: 12px;"></span>
+				     </td>
+				    </tr>
 				  	<tr>
 				  	 <td align="right">登陆名:</td>
 				  	 <td align="left"><input type="text" name="name" class = "t_input" id="name"></td>

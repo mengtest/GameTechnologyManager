@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="blogmapper">
- <select id="getBlogByUserId" parameterType="pages" resultType="blog">
-  select * from blog where userid = #{id} and sortId = #{sortId} limit #{start},#{size}
- </select>
+
  <select id = "getAllBlogByUserid" parameterType="long" resultType="blog">
  select * from blog where userid = #{userid}
  </select>
- <select id = "getBlogById" parameterType="blog" resultType="blog">
- 	select * from blog where Id = #{id} and userid = #{userid}
+ <select id = "getBlogById" parameterType="long" resultType="blog">
+ 	select * from blog where Id = #{id}
  </select>
- <select id = "getLastBlogs" parameterType="pages" resultType="blogTitle">
- 	select Id,userid,title,shortContent,createTime from blog where userid = #{userid} order by createTime desc limit #{start},#{size}
- </select>
- <select id = "getMyTotalBlog" parameterType="int" resultType = "int">
- 	select count(*) from blog where userid = #{userid}
+ 
+ <select id = "getMyTotalBlog" parameterType="blog" resultType = "int">
+ 	select count(*) from blog where userid = #{userid} and type = #{type}
  </select>
  <insert id="createBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
-  insert into blog(userid,title,shortContent,content,createTime,sortId,classifyId,yuanchuang,tag,name)values(#{userid},#{title},#{shortContent},#{content},#{createTime},#{sortId},#{classifyId},#{yuanchuang},#{tag},#{name})
+  insert into blog(userid,title,shortContent,content,createTime,sortId,classifyId,yuanchuang,tag,name,type)values(#{userid},#{title},#{shortContent},#{content},#{createTime},#{sortId},#{classifyId},#{yuanchuang},#{tag},#{name},#{type})
  </insert>
  <update id="updateBlog" parameterType="blog">
  update blog set title = #{title},shortContent = #{shortContent},content = #{content},createTime=#{createTime},sortId = #{sortId},classifyId = #{classifyId},tag = #{tag} where Id = #{id} and userid = #{userid}
@@ -26,19 +22,14 @@
  <select id="selectTotalOfBlogClassify" parameterType="int" resultType="int">
  	select count(*) from blog where classifyId = #{type}
  </select>
- <select id="selectBlogByBlogClassify" parameterType="blogParam" resultType="blogTitle" >
- 	select Id,userid,title,shortContent,createTime from blog where classifyId = #{classifyId} order by createTime desc limit #{start},#{size}
- </select>
- <select id="selectBlogBySortId" parameterType="blogParam" resultType="blogTitle">
-  select Id,userid,title,shortContent,createTime from blog where userid = #{userid} and  sortId = #{classifyId} order by createTime desc limit #{start},#{size}
- </select>
- <select id = "getTotalBlogBySort" parameterType="blogParam" resultType="int">
- select count(*) from blog where userid = #{userid} and sortId = #{classifyId}
- </select>
- <delete id="deleteUserBlog" parameterType="blogParam">
-  delete from blog where userid = #{userid} and id = #{id}
- </delete>
  <update id = "updateBlogSort" parameterType="sort">
  update blog set sortId = #{blogs} where sortId = #{id} and userid = #{userid}
  </update>
+ 
+ <select id = "getAllBlogsByType" parameterType="int" resultType="blog">
+ 	select id,name,userid,title,createTime from blog where type = #{type}
+ </select>
+ <select id="getAllBlogCountByType" parameterType="int" resultType="int">
+ 	select count(*) from blog where type = #{type}
+ </select>
 </mapper>

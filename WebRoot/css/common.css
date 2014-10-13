@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+
+.blogInfo {
+	float: left;
+	margin-top: 10px;
+	width: 750px;
+}
+
+.blogInfo a {
+	text-decoration: none;
+}
+
+.blogInfo a:HOVER {
+	text-decoration: underline;
+}
+.blogshow{
+	float:left;
+	margin-top:10px;
+	width: 750px;
+	height:800px;
+	border: 1 #FFCCCC solid;
+	overflow: auto;
+	}
+table.showblog a{
+	 text-decoration: none;
+	}
+table.showblog a:HOVER{
+	text-decoration: underline;
+	}
+.main_page {
+	float: left;
+	text-align: center;
+	width:750px;
+	margin-top: 20px;
+	border-top: 1 #FFCCCC solid;
+	padding-top: 20px;
+	vertical-align: middle;
+	height: 60px;
+}
+
+.pagecellNum {
+	float: left;
+	width: 40px;
+	height: 30px;
+	margin-left: 3px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	color: green;
+	border: 1px #FFCCCC solid;
+	line-height: 30px;
+}
+
+.pagecell {
+	float: left;
+	width: 60px;
+	height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	color: green;
+	border: 1px #FFCCCC solid;
+	line-height: 30px;
+	margin-left: 3px;
+}
+
+.pagecellEnd {
+	float: left;
+	height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	color: green;
+	border: 1px #FFCCCC solid;
+	line-height: 30px;
+	margin-left: 3px;
+}
+
+.main_page a {
+	text-decoration: none;
+}

@@ -11,10 +11,11 @@ public class Pages extends BaseEntity{
 	private int end;
 	//每页显示的数量
 	private int size;
+	//当前页
 	private int nowPage;
 	//总页数
 	private int totalPages;
-	//不同的请求分页显示不同的url
+	//不同的请求分页显示不同的url,页数的参数在url的最后面
 	private String url;
 	/**
 	 * 
@@ -25,7 +26,9 @@ public class Pages extends BaseEntity{
 	 * @param pagesize		每页显示的个数
 	 * @author guangshuai.wang
 	 */
-	public void setPages(int total,int nowpage,int pageSize){
+	public  Pages(int total,int nowpage,int pageSize){
+		this.totalPages = total;
+		this.nowPage = nowpage;
 		this.size = pageSize;
 		 totalPages = total % pageSize == 0? total / pageSize : total / pageSize + 1;
 		 if(nowpage > totalPages){
@@ -34,7 +37,6 @@ public class Pages extends BaseEntity{
 		 if(nowpage < 1){
 			 nowpage = 1;
 		 }
-		 this.nowPage = nowpage;
 		 this.start = (nowpage - 1) * pageSize;
 		 //计算结束值，防止越界
 		 if((this.start + pageSize) > total){

@@ -18,8 +18,15 @@ public class Blog extends BlogTitle{
 	public String tag;
 	//是否原创
 	public int yuanchuang = 0;
+	//发表文件作者的类型 0 是用户发布的，1是后台管理员发布的
+	public int type;
 	
-	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public int getYuanchuang() {
 		return yuanchuang;
 	}

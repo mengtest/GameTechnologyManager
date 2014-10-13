@@ -7,9 +7,7 @@
 	<insert id="insertQuestion" parameterType="question" useGeneratedKeys="true" keyProperty="id">
 		insert into question (userid,content,shortTitle,createTime,sortId,answers,isOk,xuanshang) values(#{userid},#{content},#{shortTitle},#{createTime},#{sortId},#{answers},#{isOk},#{xuanshang})
 	</insert>
-	<select id="getQuestion" parameterType="question_param" resultType="question">
-		select * from question where id > 0 <if test="userid != 0"> and userid = #{userid}</if> <if test="sortId != 0">  and sortId = #{sortId}</if> <if test="status != 2"> and isOk = #{status}</if> order by createTime desc limit #{start},#{size} 
-	</select>
+	
 	<select id="getAnswers" parameterType="long" resultType="int">
 		select answers from question where id = #{questionid}
 	</select>
@@ -19,10 +17,6 @@
 	<update id = "updateAnswers" parameterType="question">
 		update question set answers = #{answers} where id = #{id}
 	</update>
-	<select id="getTotalNumber" parameterType="paramPages" resultType="int">
-		select count(*) from question where id > 0 <if test="userid != 0">and userid = #{userid}</if> <if test="type != 0">and isOk = #{type}</if>
-		<if test="someId != 0"> and sortId = #{someId}</if>
-	</select>
 	<update id="updateQuestionToSolve" parameterType="long">
 		update question set isOk = 1 where id = #{questionid}
 	</update>

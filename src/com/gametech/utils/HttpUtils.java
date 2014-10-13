@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 
 import com.gametech.constans.AppConstans;
+import com.gametech.entity.Member;
 import com.gametech.entity.User;
 
 public class HttpUtils {
@@ -58,7 +59,7 @@ public class HttpUtils {
 	public static long getUserId(HttpServletRequest request){
 		Object obj = request.getSession().getAttribute(AppConstans.USER);
 		if(obj != null){
-			User user = (User)obj;
+			Member user = (Member)obj;
 			return user.getId();
 		}
 		return 0;
@@ -70,10 +71,10 @@ public class HttpUtils {
 	 * @return
 	 * @author guangshuai.wang
 	 */
-	public static User getUser(HttpServletRequest request){
+	public static Member getUser(HttpServletRequest request){
 		Object obj = request.getSession().getAttribute(AppConstans.USER);
 		if(obj != null){
-			User user = (User)obj;
+			Member user = (Member)obj;
 			return user;
 		}
 		return null;

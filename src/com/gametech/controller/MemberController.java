@@ -3,6 +3,7 @@ package com.gametech.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,14 +25,16 @@ public class MemberController {
 		int result = memberManager.login(member);
 		//登陆成功
 		if(result == 0){
-			return "/jsp/member/main";
+			return "redirect:/main";
 		}
 		return "redirect:/";
 		
 	}
-	@RequestMapping("checkMember")
+	@RequestMapping("/checkMember")
 	@ResponseBody
-	public String checkMember(@ModelAttribute("member")Member member){
+	public String checkMember(@RequestBody Member member){
+		//Member member = new Member();
+		//member.setName(name);
 		int result = memberManager.login(member);
 		return String.valueOf(result);
 	}

@@ -19,6 +19,15 @@ public class MemberManager {
 	 * @return  0 成功，1 用户不存在，2，密码或帐号错误,3 验证码错误
 	 */
 	public int login(Member member){
+		if(member == null){
+			return 1;
+		}
+		if(member.getCode() == null){
+			return 3;
+		}
+		if(member.getName() == null || member.getPassword() == null){
+			return 1;
+		}
 		if(!HttpUtils.checkCode(request, AppConstans.CODE_REGIST_CHECK, member.getCode())){
 			return 3;
 		}

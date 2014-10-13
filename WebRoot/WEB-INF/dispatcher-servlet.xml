@@ -13,7 +13,7 @@
  	<context:annotation-config />  
  	 <mvc:annotation-driven/>
  	 <mvc:resources location="/js/" mapping="/js/**"/>
- 	 <mvc:resources location="/style/" mapping="/style/**"/>
+ 	 <mvc:resources location="/css/" mapping="/css/**"/>
  	 <mvc:resources location="/images/" mapping="/images/**"/>
  	 
  	 <!-- 拦截器bean -->

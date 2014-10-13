@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.gametech.entity.User;
+import com.gametech.entity.Member;
 import com.gametech.utils.HttpUtils;
 
 
@@ -18,7 +18,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse reponse,Object handler){
 		if(handler instanceof HandlerMethod){
-			User user = HttpUtils.getUser(request);
+			Member user = HttpUtils.getUser(request);
 			if(user != null){
 				HandlerMethod handlerMethod = (HandlerMethod)handler;
 				Method method = handlerMethod.getMethod();
