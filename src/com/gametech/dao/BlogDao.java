@@ -91,8 +91,8 @@ public class BlogDao extends SqlSessionDaoSupport{
 	 * @param type		0，表是是用户的文章，1，是本网站的文章
 	 * @return
 	 */
-	public List<Blog> getAllBlogByType(int type){
-		return getSqlSession().selectList("blogmapper.getAllBlogsByType", type);
+	public List<Blog> getAllBlogByType(Pages page){
+		return getSqlSession().selectList("blogmapper.getAllBlogsByType", page);
 	}
 	/**
 	 * 根据文章作者的类型获取此作者下文章的总数，
@@ -103,5 +103,15 @@ public class BlogDao extends SqlSessionDaoSupport{
 	 */
 	public int getAllBlogCountByType(int type){
 		return getSqlSession().selectOne("blogmapper.getAllBlogCountByType", type);
+	}
+	/**
+	 * 根据文章类型删除文章，此方法并不在数据库实际删除文章，只是把状态改为-1
+	 * @author guangshuai.wang
+	 * 2014-10-15下午11:07:18
+	 * @param id
+	 * @return
+	 */
+	public int deleteBlogById(long id){
+		return getSqlSession().update("blogmapper.deleteBlogById", id);
 	}
 }

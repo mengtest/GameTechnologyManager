@@ -85,35 +85,4 @@
 		return year + "-" + month + "-" + date + " " + hour + ":" + minute
 				+ ":" + second;
 	}
-    $(document).ready(function(){
-    	$("#checkCode").blur(function(){
-    		checkCode();
-    	});
-    	//提交文章
-    	$("#publish").click(function(){
-    		var ue = UE.getEditor("container");
-    		var content = ue.getContentTxt();
-    		var title = $("#title").val();
-    		
-    		var articalTag = $("#tag").val();
-    		var sortNames = $("#sortId").val();
-    		var classify = $("#classifyId").val();
-    		if(title == ""){
-    			alert("请填写标题!");
-    			return ;
-    		}
-    		if(content == ""){
-    			alert("文章内容不能为空");
-    			return;
-    		}
-    		if(articalTag == ""){
-    		    alert("请填写标签");
-    		    return ;
-    		}
-    		if(classify == -1){
-    			alert("请选择文章分类");
-    			return;
-    		}
-    		document.submitForm.submit();
-    	});
-    });
+   

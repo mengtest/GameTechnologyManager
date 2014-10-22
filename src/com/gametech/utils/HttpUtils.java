@@ -1,16 +1,10 @@
 package com.gametech.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
-
 import com.gametech.constans.AppConstans;
 import com.gametech.entity.Member;
-import com.gametech.entity.User;
 
 public class HttpUtils {
 
@@ -78,6 +72,19 @@ public class HttpUtils {
 			return user;
 		}
 		return null;
+	}
+	/**
+	 * 判断用户是否登陆 ，false 未登陆，true 登陆
+	 * @author guangshuai.wang
+	 * 2014-10-15下午11:13:49
+	 * @param request
+	 * @return
+	 */
+	public static boolean isLogin(HttpServletRequest request){
+		if(HttpUtils.getUser(request) == null){
+			return false;
+		}
+		return true;
 	}
 	/**
 	 * 

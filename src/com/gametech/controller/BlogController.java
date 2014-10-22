@@ -1,8 +1,6 @@
 package com.gametech.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.gametech.constans.AppConstans;
 import com.gametech.entity.Blog;
+import com.gametech.entity.JsonResult;
 import com.gametech.entity.Member;
-import com.gametech.entity.Pages;
 import com.gametech.entity.ResponseResult;
 import com.gametech.excel.TemplateService;
 import com.gametech.excel.model.Classify;
@@ -67,6 +64,25 @@ public class BlogController {
 		
 		return "/jsp/blog/allBlog";
 	}
+	@RequestMapping("/toUserAllBlogs")
+	public String toUserAllBlogs(){
+		
+		return "/jsp/blog/userAllBlog";
+	}
+	@RequestMapping("/deleteBlogById")
+	@ResponseBody
+	public JsonResult deleteBlogById(@RequestParam("id") long id,HttpServletRequest request){
+		
+		JsonResult result = new JsonResult();
+		result.setSuccess(true);
+		if(!HttpUtils.isLogin(request)){
+			result.setSuccess(false);
+			result.setMsg("您未登陆或登陆已过期，请重新登陆！！");
+			return result;
+		} 
+		blogManager.deleteBlogById(id);
+		return result;
+	}
 	/**
 	 * 获取文章
 	 * @author guangshuai.wang
@@ -79,16 +95,11 @@ public class BlogController {
 	 */
 	@RequestMapping("/getAllBlogs/{type}")
 	@ResponseBody
-	public String getAllBlogs(@PathVariable("type")int type,HttpServletRequest request,@RequestParam("page") int nowpage,@RequestParam("rows") int rows){
-		List<Blog> blogList = blogManager.getAllBlogByType(type);
-		request.setAttribute("blogList", blogList);
+	public String getAllBlogs(@PathVariable("type")int type,@RequestParam("page") int nowpage,@RequestParam("rows") int rows){
 		int totalBlogs = blogManager.getAllBlogCountByType(type);
-		Pages pages = new Pages(totalBlogs, nowpage, rows);
-		pages.setUrl("blog/getAllBlogs/" + type + "/");
-		request.setAttribute("pageInfo", pages);
-		//return "/jsp/blog/allBlog";
+		List<Blog> blogList = blogManager.getAllBlogByType(type,nowpage,rows);
 		ResponseResult result = new ResponseResult();
-		result.setTotal(100);
+		result.setTotal(totalBlogs);
 		result.setRows(blogList);
 		return JSON.toJSONString(result);
 	}

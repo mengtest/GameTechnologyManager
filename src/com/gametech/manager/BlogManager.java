@@ -11,6 +11,7 @@ import com.gametech.constans.JedisConstans;
 import com.gametech.constans.StringLengthConstans;
 import com.gametech.dao.BlogDao;
 import com.gametech.entity.Blog;
+import com.gametech.entity.Pages;
 import com.gametech.utils.StringUtils;
 
 @Service
@@ -103,8 +104,16 @@ public class BlogManager {
 	 * @param type		0，表是是用户的文章，1，是本网站的文章
 	 * @return
 	 */
-	public List<Blog> getAllBlogByType(int type){
-		List<Blog> list = blogDao.getAllBlogByType(type);
+	public List<Blog> getAllBlogByType(int type,int page,int rows){
+		Pages pages = new Pages();
+		pages.setUserid(type);
+		if(page <=0){
+			page = 1;
+		}
+		pages.setStart((page -1 ) * rows);
+		pages.setEnd(rows);
+		List<Blog> list = blogDao.getAllBlogByType(pages);
+		
 		return list;
 	}
 	
@@ -117,5 +126,17 @@ public class BlogManager {
 	 */
 	public int getAllBlogCountByType(int type){
 		return blogDao.getAllBlogCountByType(type);
+	}
+	/**
+	 * 根据文章id
+	 * @author guangshuai.wang
+	 * 2014-10-15下午11:05:14
+	 * @param id
+	 * @param type
+	 * @return
+	 */
+	public int deleteBlogById(long id){
+		
+		return blogDao.deleteBlogById(id);
 	}
 }

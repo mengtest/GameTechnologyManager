@@ -131,10 +131,16 @@
 					<ol class="no">
 						<a href="blog/toWrite" title="发布文章" target="main">发布文章</a>
 						<a href = "blog/toAllBlogs" target="main">我的文章</a>
-						<a href = "blog/getAllBlogs/0/1" target="main">用户文章</a>
+						<a href = "blog/toUserAllBlogs" target="main">用户文章</a>
 					</ol>
-					
+					<li onClick="javascript:ShowMenu(this,1)"><a
+						href="javascript:void(0)"><i>+</i> 问题管理</a>
+					</li>
+					<ol class="no">
+						<a href="question/toUserQuestion" target="main">用户提问</a>
+					</ol>
 				</ul> 
+				
 			</span>
 		</li>
 		<li>

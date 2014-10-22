@@ -20,7 +20,14 @@
 	<update id="updateQuestionToSolve" parameterType="long">
 		update question set isOk = 1 where id = #{questionid}
 	</update>
-	<delete id="deleteOneQuestion" parameterType="long">
-		delete from question where id = #{id}
-	</delete>
+	<update id="deleteOneQuestion" parameterType="long">
+		update question set status = -1 where id = #{id}
+	</update>
+	
+	<select id="getUserAllQuestion" parameterType="pages" resultType="question">
+	    select u.name,q.shortTitle,q.createTime,q.id from question q,user u where q.userid = u.id and status = 0 order by q.createTime limit #{start},#{end}
+	</select>
+	<select id="getUserAllQuestionCount" resultType="int">
+		select count(*) from question
+	</select>
 </mapper>

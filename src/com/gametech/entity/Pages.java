@@ -17,6 +17,7 @@ public class Pages extends BaseEntity{
 	private int totalPages;
 	//不同的请求分页显示不同的url,页数的参数在url的最后面
 	private String url;
+	public Pages(){}
 	/**
 	 * 
 	 * <p>Title: setPages</p>

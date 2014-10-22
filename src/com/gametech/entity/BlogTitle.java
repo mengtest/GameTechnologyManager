@@ -14,6 +14,15 @@ public class BlogTitle extends BaseEntity{
 	public Date createTime;
 	//阅读次数
 	public long readTimes;
+	//文章的状态 0 正常，-1，删除
+	private int status;
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public Date getCreateTime() {
 		return createTime;
 	}

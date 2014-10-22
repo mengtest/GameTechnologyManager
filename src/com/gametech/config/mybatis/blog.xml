@@ -26,10 +26,15 @@
  update blog set sortId = #{blogs} where sortId = #{id} and userid = #{userid}
  </update>
  
- <select id = "getAllBlogsByType" parameterType="int" resultType="blog">
- 	select id,name,userid,title,createTime from blog where type = #{type}
+ <select id = "getAllBlogsByType" parameterType="pages" resultType="blog">
+ 	select id,name,userid,title,createTime from blog where type = #{userid} and status = 0 limit #{start},#{end}
  </select>
+ 
  <select id="getAllBlogCountByType" parameterType="int" resultType="int">
- 	select count(*) from blog where type = #{type}
+ 	select count(*) from blog where type = #{type} and status = 0
  </select>
+ 
+ <update id="deleteBlogById" parameterType="long">
+ 	update blog set status = -1 where id = #{id}
+ </update>
 </mapper>
