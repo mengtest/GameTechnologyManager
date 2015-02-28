@@ -52,7 +52,6 @@ $(document).ready(function() {
 		var ue = UE.getEditor("container");
 		var content = ue.getContentTxt();
 		var title = $("#title").val();
-
 		var articalTag = $("#tag").val();
 		var sortNames = $("#sortId").val();
 		var classify = $("#classifyId").val();

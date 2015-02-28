@@ -45,6 +45,7 @@
 		<script type="text/javascript" charset="utf-8"
 			src="<%=basePath%>js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/common.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/blog.js"></script>
 		<!-- 实例化编辑器 -->
 		<script type="text/javascript">
 	var ue = UE.getEditor('container', {
