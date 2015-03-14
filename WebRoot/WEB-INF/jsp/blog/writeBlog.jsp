@@ -51,7 +51,8 @@
 	var ue = UE.getEditor('container', {
 		initialFrameHeight : 870,
 		initialFrameWidth : 800,
-		maximumWords : 35000
+		maximumWords : 35000,
+		imagePathFormat : '/ueditor/jsp/upload/image/{yyyy}-{mm}-{dd}_{rand:6}_{filename}'
 	});
 </script>
 	</head>
@@ -71,7 +72,13 @@
 								style="width: 800px; height: 28px;" />
 						</td>
 					</tr>
-
+					<tr>
+						<td>
+							<span style="color: olive; font-size: 14px; height: 40px;">文章摘要</span>
+							<hr/>
+							<textarea rows="5" cols="110" name="shortContent"></textarea>
+						</td>
+					</tr>
 					<tr>
 						<td>
 							<!-- 加载编辑器的容器 -->

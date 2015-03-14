@@ -12,7 +12,6 @@ import com.gametech.constans.StringLengthConstans;
 import com.gametech.dao.BlogDao;
 import com.gametech.entity.Blog;
 import com.gametech.entity.Pages;
-import com.gametech.utils.StringUtils;
 
 @Service
 public class BlogManager {
@@ -29,22 +28,19 @@ public class BlogManager {
 	 */
 	public boolean writeBlog(Blog blog,long userid){
 		if(blog != null){
-			if(blog.getTitle() == null || blog.getContent() == null || blog.getClassifyId() == 0){
+			if(blog.getTitle() == null || blog.getContent() == null || blog.getClassifyId() == 0 || blog.getShortContent() == null){
 				return false;
 			}
 			if(blog.getTitle().length() > StringLengthConstans.TITLE_LENGTH){
 				return false;
 			}
+			if(blog.getShortContent().length() > StringLengthConstans.SHORT_CONTENT_LENGTH){
+				String subStr = blog.getShortContent().substring(0, StringLengthConstans.SHORT_CONTENT_LENGTH);
+				blog.setShortContent(subStr);
+			}
 			
 			blog.setUserid(userid);
 			blog.setCreateTime(new Date());
-			String blogContent = blog.getContent();
-			blogContent = StringUtils.replaceImg(blogContent);
-			if(blogContent.length() <= StringLengthConstans.SHORT_CONTENT_LENGTH){
-				blog.setShortContent(blogContent);
-			} else {
-				blog.setShortContent(blogContent.substring(0, StringLengthConstans.SHORT_CONTENT_LENGTH));
-			}
 			blog.setType(1);
 			//保存文章
 			blogDao.createBlog(blog);
