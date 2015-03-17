@@ -38,13 +38,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<span>阅读次数:${blog.readTimes }</span> &nbsp;&nbsp;
 						<span>
 						<fmt:formatDate value="${blog.createTime}" type="both"/>
-						<c:if test="${sessionScope.user_info != null}">
-							<a href= "blog/editUserBlog/${blog.id }"><span style="font-size: 12;color: lime;">编辑</span></a>
-							<a href = "blog/deleteUserBlog/${blog.id }/${blog.sortId}/${page}" onclick="return doConfirm()"><span style="font-size: 12;color: lime;">删除</span></a>
-						</c:if>
+						
 						</span>
 						
 						</td>
+						</tr>
+						<tr>
+							<td>
+							<h4>摘要：</h4>
+							${blog.shortContent }
+							</td>
 						</tr>
 						<tr>
 						<td>&nbsp;&nbsp;<span style="font-size: 14px;line-height: 22px;">${blog.content }</span></td>

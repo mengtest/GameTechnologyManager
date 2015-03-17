@@ -3,9 +3,7 @@ package com.gametech.dao;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.gametech.entity.Member;
-
 public class MemberDao extends SqlSessionDaoSupport{
-	
 	public Member getMemberByName(String name){
 		return  getSqlSession().selectOne("membermapper.selectMemberByName", name);
 	}

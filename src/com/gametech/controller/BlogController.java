@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.gametech.entity.Blog;
 import com.gametech.entity.JsonResult;
-import com.gametech.entity.Member;
 import com.gametech.entity.ResponseResult;
 import com.gametech.excel.TemplateService;
 import com.gametech.excel.model.Classify;
-import com.gametech.manager.BlogManager;
+import com.gametech.iservice.IBlogService;
 import com.gametech.utils.HttpUtils;
 
 @Controller
@@ -27,8 +27,10 @@ import com.gametech.utils.HttpUtils;
 public class BlogController {
    @Autowired
    private TemplateService templateService;
-   @Autowired
-   private BlogManager blogManager;
+  @Autowired
+  @Qualifier("blogService")
+  private IBlogService blogService;
+   
 	@RequestMapping("toWrite")
 	public String toWriteBlog(HttpServletRequest request){
 		request.setAttribute("classify", templateService.getAll(Classify.class)
@@ -44,29 +46,25 @@ public class BlogController {
 	 */
 	@RequestMapping("publish")
 	public String publishBlog(@ModelAttribute("Blog") Blog blog,HttpServletRequest request){
-		Member member = HttpUtils.getUser(request);
-		if(member != null){
-		  blog.setName(member.getName());
-		  blogManager.writeBlog(blog,member.getId());
-	    }
+		if(blog.getId() == 0){
+			blogService.writeBlog(request, blog);
+		} else {
+			blogService.updateBlog(blog);
+		}
 		return "redirect:getOneBlog/" + blog.getId();
 	}
 	@RequestMapping("/getOneBlog/{id}")
 	public String getOneBlogById(@PathVariable("id") long id,HttpServletRequest request){
-		Blog blog = blogManager.getBlogById(id);
+		Blog blog = blogService.getBlogById(id);
 		request.setAttribute("blog", blog);
-		request.setAttribute("page", 1);
-		blog.setReadTimes(blogManager.getBlogReadTimes(id));
 		return "/jsp/blog/blog";
 	}
 	@RequestMapping("/toAllBlogs")
 	public String toAllBlogs(){
-		
 		return "/jsp/blog/allBlog";
 	}
 	@RequestMapping("/toUserAllBlogs")
 	public String toUserAllBlogs(){
-		
 		return "/jsp/blog/userAllBlog";
 	}
 	@RequestMapping("/deleteBlogById")
@@ -80,14 +78,14 @@ public class BlogController {
 			result.setMsg("您未登陆或登陆已过期，请重新登陆！！");
 			return result;
 		} 
-		blogManager.deleteBlogById(id);
+		blogService.deleteBlogById(id);
 		return result;
 	}
 	/**
 	 * 获取文章
 	 * @author guangshuai.wang
 	 * 2014-10-14上午12:10:40
-	 * @param type
+	 * @param type						0 玩家发表的文章；1 系统后台发表的文章
 	 * @param request
 	 * @param nowpage 			当前页，这个是jquery-easyui自动提交的能参数，参数名必须为page
 	 * @param rows				每页显示的记录数，这个是jquery-easyui自动提交的参数，参数名必须为rows
@@ -96,11 +94,16 @@ public class BlogController {
 	@RequestMapping("/getAllBlogs/{type}")
 	@ResponseBody
 	public String getAllBlogs(@PathVariable("type")int type,@RequestParam("page") int nowpage,@RequestParam("rows") int rows){
-		int totalBlogs = blogManager.getAllBlogCountByType(type);
-		List<Blog> blogList = blogManager.getAllBlogByType(type,nowpage,rows);
+		int totalBlogs = blogService.getAllBlogCountByType(type);
+		List<Blog> blogList = blogService.getAllBlogByType(type,nowpage,rows);
 		ResponseResult result = new ResponseResult();
 		result.setTotal(totalBlogs);
 		result.setRows(blogList);
 		return JSON.toJSONString(result);
+	}
+	@RequestMapping("toEditor/{blogid}")
+	public String toEditorBlog(@PathVariable("blogid") long blogid,HttpServletRequest request){
+		blogService.toEditorBlog(blogid, request);
+		return "/jsp/blog/writeBlog";
 	}
 }

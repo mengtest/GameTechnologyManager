@@ -3,12 +3,13 @@ package com.gametech.manager;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gametech.constans.AppConstans;
 import com.gametech.dao.MemberDao;
 import com.gametech.entity.Member;
 import com.gametech.utils.HttpUtils;
-
+@Service("memberManager")
 public class MemberManager {
 	@Autowired
 	private HttpServletRequest request;

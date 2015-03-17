@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-<!-- retry_num:如果失败，重试的次数 -->
-	<jedis maxactive = "50" maxidle = "10000" maxwait = "10000" retry_num = "5" timeout = "10000"/>
-	<master ip = "127.0.0.1" port = "6379"/>
-	<slave ip = "127.0.0.1" port = "6379"/>
-</config>

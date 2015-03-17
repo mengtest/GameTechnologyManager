@@ -76,7 +76,7 @@
 						<td>
 							<span style="color: olive; font-size: 14px; height: 40px;">文章摘要</span>
 							<hr/>
-							<textarea rows="5" cols="110" name="shortContent"></textarea>
+							<textarea rows="5" cols="110" name="shortContent">${blog.shortContent }</textarea>
 						</td>
 					</tr>
 					<tr>

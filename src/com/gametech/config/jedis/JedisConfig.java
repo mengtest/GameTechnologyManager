@@ -29,7 +29,7 @@ public class JedisConfig {
 		InputStream configInput = null;
 		SAXReader reader = new SAXReader();
 		try{
-			String path  = "com/gametech/config/jedis/jedis_config.xml";
+			String path  = "/WEB-INF/config/jedis_config.xml";
 			configInput = JedisConfig.getInstance().getClass().getClassLoader().getResourceAsStream(path);
 			Document doc = reader.read(configInput);
 			Element root = doc.getRootElement();

@@ -3,6 +3,8 @@ package com.gametech.constans;
 public class StringLengthConstans {
 	/**文章标题最长字数**/
 	public static final int TITLE_LENGTH = 200;
+	/**文章的内容长度**/
+	public static final int BLOG_CONTENT_LENGTH = 50000;
 	/**用户自定义分类的名字的最大长度**/
 	public static final int SORT_LENGTH = 15;
 	/**文章摘要的长度**/

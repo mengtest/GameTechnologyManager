@@ -16,7 +16,7 @@
   insert into blog(userid,title,shortContent,content,createTime,sortId,classifyId,yuanchuang,tag,name,type)values(#{userid},#{title},#{shortContent},#{content},#{createTime},#{sortId},#{classifyId},#{yuanchuang},#{tag},#{name},#{type})
  </insert>
  <update id="updateBlog" parameterType="blog">
- update blog set title = #{title},shortContent = #{shortContent},content = #{content},createTime=#{createTime},sortId = #{sortId},classifyId = #{classifyId},tag = #{tag} where Id = #{id} and userid = #{userid}
+ update blog set title = #{title},shortContent = #{shortContent},content = #{content},sortId = #{sortId},classifyId = #{classifyId},tag = #{tag} where Id = #{id}
  </update>
  
  <select id="selectTotalOfBlogClassify" parameterType="int" resultType="int">

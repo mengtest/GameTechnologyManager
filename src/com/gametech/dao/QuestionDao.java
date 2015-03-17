@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.gametech.entity.Pages;
 import com.gametech.entity.Question;
-
 public class QuestionDao extends SqlSessionDaoSupport{
 
 	/**

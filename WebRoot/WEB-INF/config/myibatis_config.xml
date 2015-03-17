@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<typeAliases>
+<typeAlias alias="user" type="com.gametech.entity.User"/>
+<typeAlias type="com.gametech.entity.Blog" alias="blog"/>
+<typeAlias type="com.gametech.entity.Sort" alias="sort"/>
+<typeAlias type="com.gametech.entity.Pages" alias="pages"/>
+<typeAlias type="com.gametech.entity.UserInfo" alias="userInfo"/>
+<typeAlias type="com.gametech.entity.Question" alias="question"/>
+<typeAlias type="com.gametech.entity.Answer" alias="answer"/>
+<typeAlias type="com.gametech.entity.Comment" alias="comment"/>
+<typeAlias type="com.gametech.entity.BlogComment" alias="blogComment"/>
+<typeAlias type="com.gametech.entity.BlogTitle" alias="blogTitle"/>
+<typeAlias type="com.gametech.entity.PayCache" alias="payCache"/>
+<typeAlias type="com.gametech.entity.Member" alias="member"/>
+</typeAliases>
+    <mappers>
+        <mapper resource="com/gametech/entity/mybatis/user.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/blog.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/sort.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/userinfo.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/question.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/answer.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/comment.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/payCache.xml"/>
+        <mapper resource="com/gametech/entity/mybatis/member.xml"/>
+    </mappers>
+</configuration>

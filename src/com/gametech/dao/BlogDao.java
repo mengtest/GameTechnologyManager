@@ -3,16 +3,12 @@ package com.gametech.dao;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.stereotype.Repository;
 
 import com.gametech.entity.Blog;
 import com.gametech.entity.BlogTitle;
 import com.gametech.entity.Pages;
 import com.gametech.entity.Sort;
-@Repository
 public class BlogDao extends SqlSessionDaoSupport{
-
-	
 	public long createBlog(Blog blog){
 		return getSqlSession().insert("blogmapper.createBlog",blog);
 	}

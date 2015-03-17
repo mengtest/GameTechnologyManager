@@ -85,7 +85,7 @@
 	</bean>
 	<!-- 配置myibatis，dataSource是数据源，在application-dataSource.xml文件中 -->
 	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:com/gametech/config/mybatis/myibatis_config.xml"></property>
+        <property name="configLocation" value="/WEB-INF/config/myibatis_config.xml"></property>
         <property name="dataSource" ref="dataSource" />
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">   

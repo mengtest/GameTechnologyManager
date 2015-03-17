@@ -22,6 +22,12 @@ var toolbar = [ {
 			}
 		},'json');
 	}
+},'-',{
+	text:'编辑',
+	handler:function(){
+		var row =$('#dg').datagrid('getSelected');
+		window.location.href='blog/toEditor/' + row.id;
+	}
 } ];
 function changeP() {
 	var dg = $('#dg');
