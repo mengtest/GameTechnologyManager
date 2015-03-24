@@ -50,7 +50,7 @@
 		<script type="text/javascript">
 	var ue = UE.getEditor('container', {
 		initialFrameHeight : 870,
-		initialFrameWidth : 800,
+		initialFrameWidth : 850,
 		maximumWords : 35000,
 		imagePathFormat : '/ueditor/jsp/upload/image/{yyyy}-{mm}-{dd}_{rand:6}_{filename}'
 	});
@@ -63,20 +63,20 @@
 				name="submitForm">
 				<input type="hidden" value="${blog.id }" name="id" />
 				<input type="hidden" value="${token }" name = "token"/>
-				<table width="800">
+				<table width="850">
 					<tr>
 						<td height="50">
 							<span style="color: olive; font-size: 14px; height: 40px;">文章标题</span>
 							<hr />
 							<input type="text" name="title" id="title" value="${blog.title }"
-								style="width: 800px; height: 28px;" />
+								style="width: 850px; height: 28px;" />
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<span style="color: olive; font-size: 14px; height: 40px;">文章摘要</span>
 							<hr/>
-							<textarea rows="5" cols="110" name="shortContent">${blog.shortContent }</textarea>
+							<textarea rows="5" cols="118" name="shortContent">${blog.shortContent }</textarea>
 						</td>
 					</tr>
 					<tr>
